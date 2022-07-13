@@ -24,7 +24,7 @@ export class Channel {
      * 채널 정보를 가져옵니다.
      * @param slug
      */
-    public async getInfo(slug: string): Promise<ChannelInfo> {
+    public async GetInfo(slug: string): Promise<ChannelInfo> {
         const response = await this._arcalive.Client.get(`/b/${slug}`);
         const $ = cheerio.load(response.data);
 
