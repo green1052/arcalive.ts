@@ -1,0 +1,44 @@
+{
+    "name": "arcalive.ts",
+    "version": "1.0.0",
+    "description": "TypeScript용 arca.live 비공식 API",
+    "keywords": [
+        "arca",
+        "arcalive",
+        "arac.live"
+    ],
+    "homepage": "https://github.com/green1052/arcalive.ts",
+    "bugs": {
+        "url" : "https://github.com/green1052/arcalive.ts/issues",
+        "email" : "green1052@protonmail.ch"
+    },
+    "license": "AGPL-3.0-only",
+    "author": {
+        "name" : "green1052",
+        "email" : "green1052@protonmail.ch",
+        "url" : "https://github.com/green1052/"
+    },
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/green1052/arcalive.t.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "ts-node index.ts",
+        "publish": ""
+    },
+
+    "dependencies": {
+        "axios": "^0.27.2",
+        "cheerio": "^1.0.0-rc.12",
+        "set-cookie-parser": "^2.5.0"
+    },
+    "devDependencies": {
+        "@types/set-cookie-parser": "^2.4.2",
+        "ts-node": "^10.8.2",
+        "typescript": "^4.7.4"
+    },
+    "types": "dist/index.d.ts",
+    "packageManager": "yarn@3.2.1"
+}
