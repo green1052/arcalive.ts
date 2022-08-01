@@ -15,10 +15,10 @@
 ```typescript
 import {Arcalive} from "arcalive.ts";
 import {AnonymousUser} from "arcalive.ts";
-import {User} from "arcalive.ts";
+import {LoginUser} from "arcalive.ts";
 
-const user = new User("username", "password");
-const arcalive = new Arcalive(user);
+const userInfo = new LoginUser("username", "password");
+const arcalive = new Arcalive(userInfo);
 
 await arcalive.Auth.Login();
 
@@ -34,8 +34,8 @@ import {Arcalive} from "arcalive.ts";
 import {AnonymousUser} from "arcalive.ts";
 import {User} from "arcalive.ts";
 
-const user = new AnonymousUser("nickname", "password");
-const arcalive = new Arcalive(user);
+const userInfo = new AnonymousUser("nickname", "password");
+const arcalive = new Arcalive(userInfo);
 
 await arcalive.Channel.GetInfo("a");
 ```

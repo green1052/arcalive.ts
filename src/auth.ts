@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import {Arcalive} from "./arcalive";
 import {AnonymousUser} from "./user/anonymousUser";
 import axios from "axios";
-import {User} from "./user/user";
+import {LoginUser} from "./user/loginUser";
 
 export class Auth {
     private readonly _arcalive: Arcalive;
@@ -49,7 +49,7 @@ export class Auth {
     }
 
     public async Login() {
-        if (this._arcalive.User instanceof AnonymousUser)
+        if (this._arcalive.UserInfo instanceof AnonymousUser)
             throw "AnonymousUser can't use";
 
         await this._getDefaultCookie();
@@ -59,8 +59,8 @@ export class Auth {
         const params = new URLSearchParams();
         params.set("_csrf", csrf);
         params.set("goto", "");
-        params.set("username", this._arcalive.User.username);
-        params.set("password", this._arcalive.User.password);
+        params.set("username", this._arcalive.UserInfo.username);
+        params.set("password", this._arcalive.UserInfo.password);
 
         const response = await this._arcalive.Client.post("/u/login", params);
 
@@ -68,7 +68,7 @@ export class Auth {
     }
 
     public async Logout() {
-        if (this._arcalive.User instanceof AnonymousUser)
+        if (this._arcalive.UserInfo instanceof AnonymousUser)
             throw "AnonymousUser can't use";
 
         await this._arcalive.Client.get("/u/logout?goto=");
@@ -76,7 +76,7 @@ export class Auth {
     }
 
     public async IsLogin(): Promise<boolean> {
-        if (this._arcalive.User instanceof AnonymousUser)
+        if (this._arcalive.UserInfo instanceof AnonymousUser)
             throw "AnonymousUser can't use";
 
         const response = await this._arcalive.Client.get("/");
@@ -104,10 +104,10 @@ export class Auth {
     }
 
     public IsUser(): boolean {
-        return this._arcalive.User instanceof User;
+        return this._arcalive.UserInfo instanceof LoginUser;
     }
 
     public IsAnonymous(): boolean {
-        return this._arcalive.User instanceof AnonymousUser;
+        return this._arcalive.UserInfo instanceof AnonymousUser;
     }
 }

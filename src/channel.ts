@@ -1,17 +1,4 @@
 import {Arcalive} from "./arcalive";
-import * as cheerio from "cheerio";
-
-interface ChannelInfo {
-    category: string[];
-    name: string;
-    description: string;
-    slug: string,
-    subscribes: number
-}
-
-interface NoticeInfo {
-    type: "global" | "channel"
-}
 
 export class Channel {
     private readonly _arcalive: Arcalive;
@@ -23,25 +10,38 @@ export class Channel {
     /**
      * 채널 정보를 가져옵니다.
      * @param slug
+     * @constructor
      */
-    public async GetInfo(slug: string): Promise<ChannelInfo> {
-        const response = await this._arcalive.Client.get(`/b/${slug}`);
-        const $ = cheerio.load(response.data);
-
-        const $desc = $(`div[class="desc"]`);
-
-        return {
-            category: Array.from($(".board-category a").map((i, el) => $(el).text().trim())),
-            name: $("a[data-channel-name]").text(),
-            description: $desc.eq(1).text().trim(),
-            slug: slug,
-            subscribes: Number(/^구독자 (\d*)명$/i.exec($desc.eq(0).text().trim())?.[1] ?? NaN)
-        };
+    public async GetInfo(slug: string) {
+        const response = await this._arcalive.MobileClient.get(`/app/info/channel/${slug}`);
+        return response.data;
     }
 
-    public async getNotices(slug: string) {
+    /**
+     * 채널 공지를 가져옵니다.
+     * @param slug
+     * @constructor
+     */
+    public async GetNotices(slug: string) {
+        const response = await this._arcalive.MobileClient.get(`/app/list/channel/${slug}/notice`);
+        return response.data.articles.filter((data: { nickname: string; }) => !data.nickname.startsWith("*"));
+    }
 
+    /**
+     * 주요 채널을 가져옵니다.
+     * @constructor
+     */
+    public async GetMainChannels() {
+        const response = await this._arcalive.MobileClient.get("/app/list/channels/main");
+        return response.data;
+    }
+
+    /**
+     * 모든 채널을 가져옵니다.
+     * @constructor
+     */
+    public async GetChannels() {
+        const response = await this._arcalive.MobileClient.get("/app/list/channels");
+        return response.data;
     }
 }
-
-// TODO 모바일 API 일부 사용하기..

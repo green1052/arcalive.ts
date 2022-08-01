@@ -1,9 +1,10 @@
 import axios from "axios";
-import {User} from "./user/user";
+import {LoginUser} from "./user/loginUser";
 import {AnonymousUser} from "./user/anonymousUser";
 import {Auth} from "./auth";
 import {Article} from "./article";
 import {Channel} from "./channel";
+import {User} from "./user";
 
 export class Arcalive {
     public readonly Client = axios.create({
@@ -14,17 +15,26 @@ export class Arcalive {
         }
     });
 
-    public readonly User: User | AnonymousUser;
+    public readonly MobileClient = axios.create({
+        baseURL: "https://arca.live/api",
+        headers: {
+            "User-Agent": "live.arca.android/0.8.337"
+        }
+    });
+
+    public readonly UserInfo: LoginUser | AnonymousUser;
 
     public readonly Article: Article;
     public readonly Auth: Auth;
     public readonly Channel: Channel;
+    public readonly User: User;
 
-    constructor(user: User | AnonymousUser) {
-        this.User = user;
+    constructor(userInfo: LoginUser | AnonymousUser) {
+        this.UserInfo = userInfo;
 
         this.Article = new Article(this);
         this.Auth = new Auth(this);
         this.Channel = new Channel(this);
+        this.User = new User(this);
     }
 }
