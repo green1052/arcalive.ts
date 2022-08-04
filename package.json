@@ -1,6 +1,6 @@
 {
     "name": "arcalive.ts",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "TypeScript용 arca.live 비공식 API",
     "keywords": [
         "arca",

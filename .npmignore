@@ -1,7 +1,9 @@
 .yarn
-src
+/src
 .gitignore
 .npmignore
 .yarnrc.yml
 tsconfig.json
 yarn.lock
+*.iml
+.idea
