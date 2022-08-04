@@ -26,7 +26,7 @@
     "scripts": {
         "build": "tsc",
         "start": "ts-node index.ts",
-        "publish": ""
+        "publish": "yarn publish"
     },
     "dependencies": {
         "axios": "^0.27.2",
