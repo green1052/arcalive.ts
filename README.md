@@ -19,13 +19,13 @@ import LoginUser from "./loginUser";
 const user = new LoginUser("nickname", "password");
 
 const arcalive = new Arcalive(user);
-await arcalive.Login();
+await arcalive.login();
 
 const channel = arcalive.channel("a");
 
 await channel.article.write("title", "content");
 
-await arcalive.Logout();
+await arcalive.logout();
 
 ```
 
