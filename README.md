@@ -21,7 +21,7 @@ const user = new LoginUser("nickname", "password");
 const arcalive = new Arcalive(user);
 await arcalive.Login();
 
-const channel = await arcalive.channel("a");
+const channel = arcalive.channel("a");
 
 await channel.article.write("title", "content");
 
@@ -40,7 +40,7 @@ const arcalive = new Arcalive(user);
 
 // WIP
 
-const channel = await arcalive.channel("a");
+const channel = arcalive.channel("a");
 
 await channel.article.write("title", "content");
 ```
