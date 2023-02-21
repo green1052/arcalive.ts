@@ -23,13 +23,13 @@ await arcalive.login();
 
 const channel = arcalive.channel("a");
 
-await channel.article.write("title", "content");
+await channel.article.write("title", "content", "b");
 
 await arcalive.logout();
 
 ```
 
-2. 익명 상태로 a 채널 정보 확인
+2. 익명 상태로 a 채널 b 카테고리에 새 글 작성 후 로그아웃
 
 ```typescript
 import Anonymous from "./anonymous";
