@@ -2,7 +2,7 @@
 
 #### 해당 프로젝트를 사용함으로 인해 발생하는 모든 불이익은 사용자의 책임입니다.
 
-[arca.live](https://arca.live) 비공식 API
+[Node.js](https://nodejs.org)용 [arca.live](https://arca.live) 비공식 API
 
 ## 사용법
 
@@ -13,29 +13,34 @@
 1. 로그인 후 a 채널 b 카테고리에 새 글 작성 후 로그아웃
 
 ```typescript
-import {Arcalive} from "arcalive.ts";
-import {AnonymousUser} from "arcalive.ts";
-import {LoginUser} from "arcalive.ts";
+import { Arcalive } from "./arcalive";
+import LoginUser from "./loginUser";
 
-const userInfo = new LoginUser("username", "password");
-const arcalive = new Arcalive(userInfo);
+const user = new LoginUser("nickname", "password");
 
-await arcalive.Auth.Login();
+const arcalive = new Arcalive(user);
+await arcalive.Login();
 
-await arcalive.Article.Write("a", "b", "제목 테스트", "본문 테스트");
+const channel = await arcalive.channel("a");
 
-await arcalive.Auth.Logout();
+await channel.article.write("title", "content");
+
+await arcalive.Logout();
+
 ```
 
 2. 익명 상태로 a 채널 정보 확인
 
 ```typescript
-import {Arcalive} from "arcalive.ts";
-import {AnonymousUser} from "arcalive.ts";
-import {User} from "arcalive.ts";
+import Anonymous from "./anonymous";
 
-const userInfo = new AnonymousUser("nickname", "password");
-const arcalive = new Arcalive(userInfo);
+const user = new Anonymous("nickname", "password");
 
-await arcalive.Channel.GetInfo("a");
+const arcalive = new Arcalive(user);
+
+// WIP
+
+const channel = await arcalive.channel("a");
+
+await channel.article.write("title", "content");
 ```

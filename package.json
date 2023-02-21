@@ -14,7 +14,7 @@
     },
     "license": "AGPL-3.0-only",
     "author": "green1052",
-    "exports": "dist/index.js",
+    "exports": "./dist/index.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/green1052/arcalive.ts.git"
@@ -22,16 +22,28 @@
     "scripts": {
         "build": "tsc",
         "start": "ts-node index.ts",
-        "publish": "yarn npm publish"
+        "publish": "yarn npm publish",
+        "lint": "prettier-eslint --write 'src/**/*.{js,ts}'",
+        "test": "tsc && node dist/test/index.js"
     },
     "dependencies": {
         "cheerio": "^1.0.0-rc.12",
-        "got": "^12.5.3"
+        "got": "^12.5.3",
+        "tough-cookie": "^4.1.2"
     },
     "devDependencies": {
+        "@types/tough-cookie": "^4.0.2",
+        "@typescript-eslint/eslint-plugin": "^5.53.0",
+        "@typescript-eslint/parser": "^5.53.0",
+        "eslint": "^8.34.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-import-resolver-typescript": "^3.5.3",
+        "eslint-plugin-import": "^2.27.5",
+        "prettier": "^2.8.4",
+        "prettier-eslint-cli": "^7.1.0",
         "ts-node": "^10.9.1",
         "typescript": "^4.7.4"
     },
-    "types": "dist/index.d.ts",
+    "types": "./dist/index.d.ts",
     "packageManager": "yarn@3.4.1"
 }
